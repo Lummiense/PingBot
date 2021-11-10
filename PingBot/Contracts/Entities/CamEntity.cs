@@ -1,8 +1,9 @@
 ﻿using System;
 
+
 namespace PingBot.Contracts.Entities
 {
-    public class CamEntity:BaseEntity
+    public class CamEntity:IEntity
     {
         public uint Id { get; set; }
         public bool IsActive { get; set; }

@@ -2,7 +2,7 @@
 
 namespace PingBot.Contracts.Entities
 {
-    public class CamTypeEntity:BaseEntity
+    public class CamTypeEntity:IEntity
     {
         public uint Id { get; set; }
         public bool IsActive { get; set; }

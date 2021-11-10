@@ -2,7 +2,7 @@
 
 namespace PingBot.Contracts.Entities
 {
-    public class IEntity
+    public interface IEntity
     {
         public uint Id { get; set; }
         public DateTime UpdateDate { get; set; }

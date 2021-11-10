@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PingBot.Contracts.Entities
 {
-    public class ContractEntity:BaseEntity
+    public class ContractEntity:IEntity
     {
         public uint Id { get; set; }
         public bool IsActive { get; set; }

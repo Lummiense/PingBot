@@ -37,9 +37,15 @@ namespace PingBot.Contracts
             await _dataContext.Set<T>().AddRangeAsync(newEntities);
         }
 
-        public async Task Delete<T>(T entity) where T : class, IEntity
+        public async Task Delete<T>(uint Id) where T : class, IEntity
         {
+            var entity = await _dataContext.Set<T>().FirstOrDefaultAsync(x => x.Id == Id);
             await Task.Run(() => _dataContext.Set<T>().Remove(entity));
+            await SaveChangesAsync();
+        }
+        public async Task Remove<T>(T entity) where T : class
+        {
+            await Task.Run(() =>_dataContext.Set<T>().Remove(entity));
         }
 
         public async Task DeleteRange<T>(IEnumerable<T> entities) where T : class, IEntity
@@ -47,7 +53,7 @@ namespace PingBot.Contracts
             await Task.Run(() => _dataContext.Set<T>().RemoveRange(entities));
         }
 
-        public async Task Update<T>(T entity) where T : class, IEntity
+        public async Task Update<T>(T entity) where T : class,IEntity
         {
             await Task.Run(() => _dataContext.Set<T>().Update(entity));
         }
