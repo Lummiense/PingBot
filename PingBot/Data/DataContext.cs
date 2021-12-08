@@ -8,6 +8,7 @@ namespace PingBot.Data
         public DbSet<CamEntity> Camers { get; set; }
         public DbSet<CamTypeEntity> CamTypes { get; set; }
         public DbSet<ContractEntity> Contract { get; set; }
+        public DbSet<UserEntity>Users { get; set; }
         
         public DataContext(DbContextOptions<DataContext> options): base(options)
         {

@@ -7,7 +7,7 @@ namespace PingBot.Services
     public interface ICamService
     {
         CamEntity Get(uint Id);
-        CamEntity GetByIp(string Ip);
+        //CamEntity GetByIp(string Ip);
         IEnumerable<CamEntity> GetAll();
         Task<uint> Add(CamEntity Cam);
         Task AddRange(IEnumerable<CamEntity> Camers);

@@ -20,11 +20,11 @@ namespace PingBot.Services
             return entity;
         }
 
-        public CamEntity GetByIp(string Ip)
-        {
-            var entity = _dbRepository.Get<CamEntity>().FirstOrDefault(x => x.IP == Ip);
-            return entity;
-        }
+        // public CamEntity GetByIp(string Ip)
+        // {
+        //     var entity = _dbRepository.Get<CamEntity>().FirstOrDefault(x => x.IP == Ip);
+        //     return entity;
+        // }
 
         public IEnumerable<CamEntity> GetAll()
         {

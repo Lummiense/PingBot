@@ -31,13 +31,14 @@ namespace PingBot
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => 
-                x.UseNpgsql(Configuration.GetConnectionString("Db"))) ;
+                x.UseNpgsql(Configuration.GetConnectionString("Db")),ServiceLifetime.Singleton) ;
             services.AddControllers().AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
             services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "PingBot", Version = "v1"}); });
-            services.AddScoped<IDbRepository, DbRepository>();
-            services.AddTransient<ICamService, CamService>();
+            services.AddSingleton<IDbRepository, DbRepository>();
+            services.AddSingleton<ICamService, CamService>();
+            services.AddSingleton<TelegarmBot>();
             //TODO: Add services + Automapper
         }
 
@@ -51,13 +52,14 @@ namespace PingBot
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PingBot v1"));
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints => 
+                { endpoints.MapControllers(); });
         }
     }
 }

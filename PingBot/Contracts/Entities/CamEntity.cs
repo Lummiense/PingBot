@@ -5,6 +5,7 @@ namespace PingBot.Contracts.Entities
 {
     public class CamEntity:IEntity
     {
+        public long ChatId { get; set; }
         public uint Id { get; set; }
         public bool IsActive { get; set; }
         public DateTime UpdateDate { get; set; }

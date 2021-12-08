@@ -30,18 +30,18 @@ namespace PingBot.Controllers
             return Ok(cam);
         }
         
-        [HttpGet("{ip}")]
-        public ActionResult<CamEntity> GetByIp(uint ip)
-        {
-            var cam = _camService.Get(ip);
-
-            if (cam == null)
-            {
-                return BadRequest("Cam  was not found");
-            }
-
-            return Ok(cam);
-        }  
+        // [HttpGet("{ip}")]
+        // public ActionResult<CamEntity> GetByIp(uint ip)
+        // {
+        //     var cam = _camService.Get(ip);
+        //
+        //     if (cam == null)
+        //     {
+        //         return BadRequest("Cam  was not found");
+        //     }
+        //
+        //     return Ok(cam);
+        // }  
         [HttpGet]
         public ActionResult<CamEntity> GetAll()
         {
