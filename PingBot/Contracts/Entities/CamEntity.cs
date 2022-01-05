@@ -3,6 +3,7 @@
 
 namespace PingBot.Contracts.Entities
 {
+    
     public class CamEntity:IEntity
     {
         public long ChatId { get; set; }
@@ -15,5 +16,6 @@ namespace PingBot.Contracts.Entities
         public string InstallationPlacePhoto { get; set; }
         public string ViewPhoto { get; set; }
         public string IP { get; set; }
+        public ContractEntity Contract { get; set; }
     }
 }

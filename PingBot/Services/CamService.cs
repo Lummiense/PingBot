@@ -1,77 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.JsonPatch.Operations;
+using Microsoft.EntityFrameworkCore;
 using PingBot.Contracts;
 using PingBot.Contracts.Entities;
+using PingBot.Data;
 
 namespace PingBot.Services
 {
-    public class CamService:ICamService
+    public class CamService : ICamService
     {
-        //TODO: Add check for  incoming data
-        private readonly IDbRepository _dbRepository;
-        public CamService(IDbRepository repository)
-        {
-            _dbRepository = repository;
-        }
-        public CamEntity Get(uint Id)
-        {
-            var entity = _dbRepository.Get<CamEntity>().FirstOrDefault(x => x.Id == Id);
-            return entity;
-        }
+        private readonly DataContext _context;
 
-        // public CamEntity GetByIp(string Ip)
-        // {
-        //     var entity = _dbRepository.Get<CamEntity>().FirstOrDefault(x => x.IP == Ip);
-        //     return entity;
-        // }
-
-        public IEnumerable<CamEntity> GetAll()
+        public CamService(DataContext context)
         {
-            return _dbRepository.GetAll<CamEntity>();
+            _context = context;
         }
-
-        public async Task<uint> Add(CamEntity Cam)
+        public async Task<CamEntity> GetCam(uint camID)
         {
-            var result = await _dbRepository.Add(Cam);
-            await _dbRepository.SaveChangesAsync();
-            return result;
+            return await _context.Camers.FirstOrDefaultAsync(x =>x.Id==camID);
         }
-
-        public async Task AddRange(IEnumerable<CamEntity> Camers)
-        {
-            await _dbRepository.AddRange(Camers);
-            await _dbRepository.SaveChangesAsync();
-        }
-
-        public async Task<uint> Update(CamEntity Cam)
-        {
-            await _dbRepository.Update<CamEntity>(Cam);
-            await _dbRepository.SaveChangesAsync();
-            return Cam.Id;
-        }
-
-        public async Task UpdateRange(IEnumerable<CamEntity> Camers)
-        {
-            await _dbRepository.UpdateRange(Camers);
-            await _dbRepository.SaveChangesAsync();
-        }
-
-        public async Task Remove (CamEntity Cam)
-        {
-            await _dbRepository.Remove(Cam);
-        }
-        public async Task Delete(uint Id)
-        {
-            var entity = _dbRepository.Get<CamEntity>().FirstOrDefault(x => x.Id == Id);
-            await _dbRepository.Remove(entity);
-            await _dbRepository.SaveChangesAsync();
-        }
-
-        public async Task DeleteRange(IEnumerable<CamEntity> Camers)
-        {
-            await _dbRepository.DeleteRange(Camers);
-            await _dbRepository.SaveChangesAsync();
-            }
     }
 }
